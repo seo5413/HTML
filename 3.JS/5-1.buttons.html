@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #result{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>버튼<h1>
+    <div id = "result">0</div>
+    <div>
+        <button onclick="increameant()">증가(+1)</button>
+        <button onclick="decreameant()">감소(-1)</button>
+    </div>
+    <script>
+        function showhide(){
+            var mydiv = document.getElementById('showhide');
+        
+            //1. 이 요소를 숨기기( 버튼 다시 누르면 보이기)
+            if(mydiv.style.display === 'none'){
+                mydiv.style.display = 'block';
+            } else {
+                mydiv.style.display = 'none';
+            }
+        }
+        
+    </script>
+    <!-- <script src="5-2.button.js"></script> -->
+</body>
+</html>

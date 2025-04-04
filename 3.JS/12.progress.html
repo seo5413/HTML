@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #progressBar{
+            width: 100%;
+            background-color: gray;
+        }
+
+        #progress{
+            width: 0%;
+            height: 30px;
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <h1>프로그레스바(타이머)</h1>
+    <input type="number" id="timeInput" placeholder="초 입력" min="1">
+    <button id="startButton" onclick="startProgress()">시작</button>
+    <button id="resetButton">리셋</button>
+
+    <div id="progressBar">
+        <div id="progress"></div>
+    </div>
+    <script>
+        // 1. 초를 읽어서서
+        // 1-1. 초를 읽어서, 등분해야함
+        // 1-2. 1초마다 기다리면서, 진척도를 표시
+        
+        const timeInput = document.getElementById('timeInput');
+        const progressBar = document.getElementById('progress');
+
+        let duration = 0; //사용자가 입력한 시간
+
+        function startProgress(){
+            duration = Number(timeInput.value);
+
+            let timePassed = 0; //경과된 시간간
+            setInterval(function(){
+                timePassed++; //매초 증가
+
+                let progress = (timePassed / duration) * 100;
+
+                progressBar.style.width=`${progress}%` //progress + "%";//진행 바 업데이트트
+
+                //끝까지 완료했으며 이 타이머 삭제제
+                if(timePassed >= duration){
+                    clearInterval(interval);
+                    console.log("타이머 삭제중",interval);
+                }
+
+            },1000);
+
+        }
+
+        //hw2. RESET 버튼 구현하기
+        //2-1. RESET 버튼 누르면 타이머 멈추기
+        //2-2. RESET 눌렀을떄 타이머도 멈ㅊ고 추가적으로 바 게이지 초기화
+    </script>
+</body>
+</html>
