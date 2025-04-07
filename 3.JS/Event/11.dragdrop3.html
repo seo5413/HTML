@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #dragItem1{
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+            margin-bottom: 20px;
+        }
+        #dragItem2{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            margin-bottom: 20px;
+        }
+        #dragItem3{
+            width: 100px;
+            height: 100px;
+            background-color: violet;
+            margin-bottom: 20px;
+        }
+
+        #dropZone{
+            width: 600px;
+            height: 600px;
+            border: 2px solid black;
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <div id="dragItem">
+        <div id="dragItem1" draggable="true">drag me</div>
+        <div id="dragItem2" draggable="true">drag me</div>
+        <div id="dragItem3" draggable="true">drag me</div>
+        <div id="dropZone">drop here</div>
+    </div>
+    <script>
+        const dragItem = document.getElementById('dragItem');
+        const dropZone = document.getElementById('dropZone');
+
+        dragItem1.addEventListener('dragstart',function(){
+            console.log('드래그 시작');
+        })
+        dragItem2.addEventListener('dragstart',function(){
+            console.log('드래그 시작');
+        })
+        dragItem3.addEventListener('dragstart',function(){
+            console.log('드래그 시작');
+        })
+
+        dropZone.addEventListener('dragover',function(){
+            event.preventDefault();
+            console.log('내 위에 개체 있음');
+        })
+
+        dropZone.addEventListener('drop',function(){
+            event.preventDefault();
+            console.log('드롭발생');
+            dropZone.appendChild(dragItem(value));
+        })
+    </script>
+</body>
+</html>

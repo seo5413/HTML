@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>숫자 맞추기 게임</h1>
+    <h2>1~100까지의 숫자 맞추기</h2>
+    <input type="number" id="guessNumber" placeholder="숫자를 입력하세요">
+    <button onclick="checkUserInput()" id="guessButton">guessButton</button>
+    <p id="result"></p>
+    <ol id="history"></ol>
+    <script>
+        // 1. 랜덤 숫자를 만들고 기억해둔다
+        //    힌트 : Math.random() <-- 위에 범위내의 숫자가 생성
+        const randomNumber = Math.floor(Math.random()*100)+1;
+        console.log(randomNumber);
+        const userInput = document.getElementById('guessNumber');
+        const result = document.getElementById('result');
+        const history = document.getElementById('history');
+        function checkUserInput(){
+            const userInputValue = Number(userInput.value);
+            console.log("랜덤숫자 : ",userInput.value);
+            let resultText = "";
+            if (userInput.value < randomNumber){
+                console.log("숫자가 작음");
+                result.innerHTML = "숫자가 작음"
+            }else if(userInput.value > randomNumber){
+                console.log("숫자가 큼");
+                result.innerHTML = "숫자가 큼"
+            }else{
+                console.log("정답");
+                result.innerHTML = '<B style = "color : red"> 정답 </B>'
+            }
+            // 4. 나의 찍기 기록을 계속 화면에 유지
+            const newResult = document.createElement("li");
+            newResult.innerText = "사용자 입력 : " + userInputValue + " , " + result.innerText;
+            result.appendChild(newResult);
+            history.appendChild(newResult);
+
+            // 5. 각각의 입력값 뒤에 그 결과도 함께 적기
+        }
+        // const guessNumber = document.getElementById("result");
+        // function myEvent(){
+        // 2. 사용자가 입력한 값을보고 내가 생각한 숫자보다 작으면 숫자가 너무 작다 <-> 숫자가 너무크다
+        //    같으면 정답입니다
+        //    if로 비교
+        //     result =Math.floor(Math.random()*100)+1;
+        //     let guessNumber = 50;
+        //     if(result > guessNumber){
+        //         document.write("작다");
+        //     }else if (result < guessNumber){
+        //         document.write("크다");
+        //     }else{
+        //         document.write("정답");
+        //     }
+        //     console.log(result);
+        // }
+        // 3. 풀이를 하면서, 어떻게 숫자를 찍어야 좋은 것인가 생각해보기(나는 몇번에 맞출 수 있는가)
+
+        
+    </script>
+    
+</body>
+</html>
