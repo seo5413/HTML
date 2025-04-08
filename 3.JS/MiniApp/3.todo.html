@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #ToDo-list li{
+            cursor: pointer;
+        }
+        #ToDo-list li.done{
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <h1>ToDo List</h1>
+    <input id="inputText"  type="text" placeholder="할 일 추가">
+    <button id="add-ToDo">Add</button>
+    <hr>
+    <ul id="ToDo-list"></ul>
+    <script>
+        document.getElementById('add-ToDo').addEventListener('click',() =>{
+
+            
+            // 1. 입력 창안에 있는 값을 가져온다
+            // 1-1. 입력창 안에 있는 값을 가져온다
+            const inputBox = document.getElementById('inputText')
+            let todoString = inputBox.value;
+            console.log(todoString);
+            
+            const todoList = document.getElementById('ToDo-list');
+            
+            // 1-2. ui에다가 추가
+            const new_li = document.createElement('li');
+            new_li.textContent = inputBox.value;
+            todoList.appendChild(new_li);
+            new_li.innerHTML = `${inputBox.value} <button class="delete"> 삭제 </button>`;
+            
+            
+            // 2. 완료기능 구현
+            //2-1. 각 요소마다 클릭 가능한 이벤트 추가
+            //2-2. 그 요소를 클릭했을 때 디자인 속성을 추가(done)
+            new_li.addEventListener('click',(e) => {
+                new_li.classList.toggle('done');
+            })
+
+            
+            inputBox.value = "";
+            
+            // todoList.addEventListener('button'),(e) =>{
+                // }
+                
+                // 3. 삭제 기능 추가
+                const deleteBtn = new_li.querySelector('.delete');
+                deleteBtn.addEventListener('click', () => {
+                    new_li.remove();
+                });
+            
+        });
+        
+        document.getElementById('inputText').addEventListener('keydown', (e) =>{
+            if(event.key === 'Enter'){
+                document.getElementById('add-ToDo').click();
+            }
+        })
+    </script>
+</body>
+</html>
