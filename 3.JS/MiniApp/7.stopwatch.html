@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스탑워치</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            height: 100vh;
+            justify-content: center;
+            background-color: lightgrey;
+        }
+
+        #display{
+            font-size: 50px;
+        }
+
+        .button-container{
+            gap: 10px;
+        }
+        button{
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="display">00:00:00</div>
+    <div class = "button-container">
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+    <script>
+        const display = document.getElementById('display');
+        const startButton = document.getElementById('startBtn');
+        const stopButton = document.getElementById('stopBtn');
+        const resetButton = document.getElementById('resetBtn');
+        
+        let startTime;
+        let updateTime;
+        let timerInterval;
+        let running = false; // 스탑워치의 실행 여부
+        let diff = 0; // 경과시간
+
+        function startTimer(){
+            if(!running){
+                startTime = new Date().getTime();
+                timerInterval = setInterval(updateTimer,10);
+                running = true;
+            }
+        }
+
+        function updateTimer(){
+            updateTime = new Date().getTime();
+            diff = updateTime - startTime;
+
+            let min = Math.floor(diff % (1000 * 60 * 60) / (1000 * 60));
+            let sec = Math.floor(diff % (1000 * 60) / 1000);
+            let milsec = Math.floor(diff % 1000 / 10)
+
+            // console.log(`${min}분, ${sec}초, ${milsec}ms`);
+            // display.textContent = 
+            //     (min < 10 ? '0' + min : min) + ":" + 
+            //     (sec < 10 ? '0' + sec : sec) + ":" + 
+            //     (milsec < 10 ? '0' + milsec : milsec);
+            
+            display.textContent = 
+                String(min).padStart(2,'0') + ":"+
+                String(sec).padStart(2,'0') + ":"+
+                String(milsec).padStart(2,'0');
+
+        }
+        function stopTimer(){
+            clearInterval(timerInterval);
+            running = false;
+        }
+
+        function resetTimer(){
+            clearInterval(timerInterval);
+            diff = 0;
+            display.textContent = '00:00:00';
+
+        }
+
+
+        startButton.addEventListener('click',startTimer);
+        stopButton.addEventListener('click',stopTimer);
+        resetButton.addEventListener('click',resetTimer);
+    </script>
+</body>
+</html>

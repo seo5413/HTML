@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>TTS 예제</h1>
+    <textarea id="text" rows="4" cols="50">Hello, this is a text-to-speech example</textarea>
+    <div class="controls">
+        <select id="voiceSelect"></select>
+        <button id="speakButton">말하기기</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded',() =>{
+            const textInput = document.getElementById('textInput');
+            const voiceSelect = document.getElementById('voiceSelect');
+            const speakButton = document.getElementById('speakButton');
+    
+            // Web Speech API를 지원하는가
+            if('speechSynthesis' in window){
+                const voices = window.speechSynthesis.getVoices();
+                console.log(voices)
+                console.log('지원함');
+
+                voiceSelect.innerHTML='';
+                voices.forEach((voice,index) => {
+                    const option = document.createElement('option');
+                    option.value = index;
+                    option.text=`${voice.name} (${voice.lang}) (${voice.lang})`;
+                    voiceSelect.add(option);
+                });
+                
+                window.speechSynthesis.addEventListener('voicechanged',updateVoice)
+            }else{
+                console.log('음성 지원 안하는 브라우저')
+            }
+        })
+    </script>
+</body>
+</html>

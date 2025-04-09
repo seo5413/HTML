@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            border: 1px dotted black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        let x = 0;
+        let direction = 1;
+        const BOX_SIZE = 50;
+        function draw(){
+
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+
+            ctx.fillStyle = 'red';
+            ctx.fillRect(x, 50 , BOX_SIZE , 50);
+
+            x += 1 * direction;
+            if( x > canvas.width - BOX_SIZE ){
+                direction = -1;
+            } 
+            if(x < 0 ) {
+                direction = 1;
+            }
+            
+            // 1. 네모가 다시 돌아오게
+            
+            
+            requestAnimationFrame(draw);
+
+        }
+
+        draw();
+    </script>
+</body>
+</html>
