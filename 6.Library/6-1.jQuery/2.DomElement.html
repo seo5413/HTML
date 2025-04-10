@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <h1>쇼핑리스트</h1>
+    <ul id="shoppingList">
+        <li>빵빵</li>
+        <li>우유유</li>
+        <li>계란란</li>
+    </ul>
+    <input text="text" id="newItem" placeholder="새로운 상품 추가">
+    <button id="addItemBtn">추가</button>
+    <script>
+        $(document).ready(function(){
+            $('#addItemBtn').click(function(){
+                const newItem = $('#newItem').val()
+
+                if(newItem !== ''){
+                    $(`#shoppingList`).append('<li>' + newItem + '</li>');
+                    $(`#newItem`).val('');
+                }
+            })
+        })
+
+
+
+
+
+        // document.addEventListener('DomContentLoaded',function(){
+        //     let addItemBtn = document.getElementById('addItemBtn');
+
+        //     addItemBtn.addEventListener('click', function(){
+        //         const newItemInput = document.getElementById('newItem');
+        //         const newItemValue = newItemInput.value;
+        //     });
+
+        //     if(newItemValue.trim() !== ''){
+        //         const shoppingList = document.getElementById('shoppingList');
+        //         const newItemElement = document.createElement('li');
+
+        //         newItemElement.textContent = newItemValue;
+        //         shoppingList.appendChild(newItemElement);
+
+        //         newItemInput.value = '';
+        //     }
+        // });
+    </script>
+</body>
+</html>
