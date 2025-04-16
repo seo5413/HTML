@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const name = username.value;
-        
+        ``
         console.log('생성할 이름: ', name);
         fetch('/users', {
             method: 'POST',
