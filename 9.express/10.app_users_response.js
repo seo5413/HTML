@@ -32,9 +32,9 @@ app.post('/users', (req, res) => {
         const name = req.body.name;
         users[nextId++] = name;
         
-        res.status(201).send('등록 성공공');
+        res.status(201).send('등록 성공');
     } catch (error) {
-        res.status(500).send('서버 내부 오류류');
+        res.status(500).send('서버 내부 오류');
         
     }
 });
