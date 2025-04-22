@@ -6,8 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>헬로우헬로우헬로우헬로우헬로우헬로우</h1>
-    <h3>헬로우헬로우헬로우헬로우</h3>
-    <img src="images/scene1.png" alt="배경">
+    <h1>사용자 목록:</h1>
+    <ul>
+        {% for name in names %}
+        <li>
+            {{ name}}
+        </li>
+        {% endfor %}
+    </ul>
+    
 </body>
 </html>

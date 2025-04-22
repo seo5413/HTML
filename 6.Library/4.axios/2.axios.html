@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1> fetch를 사용한 외부요청</h1>
+    <button id="loadDataBtn">데이터 로드</button>
+    <button id="postDataBtn">데이터 전송</button>
+    <button id="loadImageBtn">이미지 전송</button>
+    <div id="result"></div>
+    <script>
+        document.getElementById('loadDataBtn').addEventListener('click', async () =>{
+           const response = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+           try{
+               const data = response.data;
+               document.getElementById('result').innerHTML = `
+                                    <p><strong>타이틀 : </strong>${data.title}
+                                    <p><strong>본문 : </strong>${data.body}
+                                    `
+           }catch{((error) => {
+                    document.getElementById('result').innerHTML = `오류가 발생했습니다.`
+                })
+                    
+                }
+                                
+        });          
+        document.getElementById('postDataBtn').addEventListener('click', async () =>{
+                const postData = {
+                title : 'foo',
+                body : 'bar',
+                userId : 1
+            };
+            const response = await axios.post('https://jsonplaceholder.typicode.com/posts', postData);
+           
+            document.getElementById('result').innerText=JSON.stringify(response.data, null, 2);
+        });
+        // 좌측에 보이는 fetch post를 axios로 바꾼다
+
+        document.getElementById('loadImageBtn').addEventListener('click', () => {
+            document.getElementById('result').innerHTML = `
+                        <img src = "https://images.dog.ceo/breeds/chippiparai-indian/Indian-Chippiparai.jpg">
+                    `
+        })
+    </script>
+</body>
+</html>

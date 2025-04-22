@@ -2,3 +2,14 @@
 
 #기본 모드 모듈
 node_modules/
+
+# 윈도우 실행파일
+*.exe
+
+# 크리덴설
+secret.txt
+.env
+
+.db
+.sqlite
+.sqlite3

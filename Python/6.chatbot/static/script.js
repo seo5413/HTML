@@ -1,7 +1,6 @@
 // 미션1-1. 저 영역을 클리해서 창이 나오게 한다.
 // 미션1-2. X박스를 눌러서 다시 창이 닫히게 한다.
 
- 
 // 미션3. Send 버튼을 통해서... 백엔드로 사용자가 입력한 대화 내용을 전송한다.
 // 미션3-2. 엔터로도 입력되게...
 // 미션4. 받아온 응답(에코 메세지)을 대화창에 출력한다.
@@ -13,6 +12,8 @@ const sendMessage = document.getElementById('sendMessage');
 const chatbotInput = document.getElementById('chatbotInput');
 const chatbotMessages = document.getElementById('chatbotMessage');
 
+const API_SERVER = 'http://127.0.0.1:5000'
+
 chatbotIcon.addEventListener('click', () => {
     chatbotIcon.style.display = 'none';
     chatbotWindow.style.display = 'flex';
@@ -23,50 +24,41 @@ closeChatbot.addEventListener('click', () => {
     chatbotWindow.style.display = 'none';
 });
 
-
-
-
-
+function addMessage(message, sender='user') {
+    const msg = document.createElement('div');
+    msg.classList.add('message', sender);  // 'user' 또는 'chatbot'을 동적으로 추가
+    msg.innerText = message;
+    chatbotMessages.appendChild(msg);
+    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
 
 // 그래서.... 이 아래 함수를 잘게 나누기.... TODO
-async function getInputFromYourAndClearInputScreenAndSendMessageToServerAndWriteAnswer() {
+async function getInputFromYourSendMessage() {
     const question = chatbotInput.value;
+    
     // 메세지 지우기
     chatbotInput.value = '';
+    addMessage(question, 'user');
 
-    // 화면에 내 메세지 추가한다.
-    const myMessage = document.createElement('div');
-    myMessage.classList.add('user'); // 사용자용 스타일
-    myMessage.innerHTML = '<i class="bi bi-person"></i>' + question;
-    chatbotMessages.appendChild(myMessage);
-    myMessage.style.backgroundColor = "blue";
-
-    
-    const resp = await fetch('/api/chat', {
+    // 서버로 보낸다
+    const resp = await fetch(`${API_SERVER}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question }),
     });
 
-    const result = await resp.json();   
-    // console.log(result);
+    const result = await resp.json();    
 
-    const answer = document.createElement('div');
-    answer.classList.add('bot'); // 챗봇용 스타일
-    answer.innerHTML = '<i class="bi bi-robot">  </i> '+ result.question;
-    answer.style.backgroundColor = "pink";
-    chatbotMessages.appendChild(answer);
+    addMessage(result.question, 'chatbot');
 }
 
-
-
 sendMessage.addEventListener('click', () => {
-    getInputFromYourAndClearInputScreenAndSendMessageToServerAndWriteAnswer();
+    getInputFromYourSendMessage();
 });
 
 chatbotInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         // console.log('엔터키눌렸으니, 서버로 보내는 코드 짜기 TODO');
-        getInputFromYourAndClearInputScreenAndSendMessageToServerAndWriteAnswer();
+        getInputFromYourSendMessage();
     }
 });

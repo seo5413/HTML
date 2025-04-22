@@ -51,3 +51,4 @@ print(numbers)
 
 numbers = [x for x in range(10) if x % 2 == 1] # 홀수만 남기기...
 print(numbers)
+
