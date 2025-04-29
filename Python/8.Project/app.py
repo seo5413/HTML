@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-     return send_from_directory('static','index.html')
+     return render_template('static','index.html')
 
 @app.route('/login', methods=["POST"])
 def user_login():
@@ -17,8 +17,8 @@ def user_login():
       cur = conn.cursor()
 
 
-      cur.execute('SELECT * FROM users WHERE username=? AND PASSWORD=?',{username,password})
-      user = cur.fetchone()[0]
+      cur.execute('SELECT * FROM users WHERE username=? AND PASSWORD=?',(username,password))
+      user = cur.fetchone()
 
       conn.close()    
       if user:
@@ -27,4 +27,5 @@ def user_login():
         return "로그인 실패"   
         
 if __name__ == "__main__" :
+  
     app.run(debug=True)

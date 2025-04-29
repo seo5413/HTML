@@ -14,7 +14,7 @@ app.post('/login', (req,res) => {
    if (user) {
        res.send('로그인 성공');
     }else{
-       res.send('로그인 시랲');
+       res.send('로그인 실패');
     }   
 });
 

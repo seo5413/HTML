@@ -1,0 +1,53 @@
+/* 상단 nav bar */
+nav ul{
+    list-style-type: none;
+    padding: 0;
+
+}
+
+nav ul li{
+    display: inline;
+    margin-right: 10px;
+    
+}
+
+/* tweet main design */
+.tweet {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.tweet-body-row{
+    display: flex;
+    justify-content: space-between;
+}
+.tweet-author{
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #ccc;
+    font-style: italic;
+}
+.tweet-action{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flash-message{
+    list-style-type: none;
+    padding: 0;
+}
+.flash-message li{
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+.flash-message li.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+.flash-message li.danger {
+    background-color: #ec8b8b;
+    color: #b2210eac;
+}
